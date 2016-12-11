@@ -1,6 +1,7 @@
 {
   "name": "ng2-photobooth",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Jean-Baptiste Malatrasi"
   "license": "MIT",
   "angular-cli": {},
   "scripts": {

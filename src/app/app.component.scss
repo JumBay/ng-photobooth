@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+
+  pb-camera {
+    flex-grow: 2;
+    height: 100%;
+    width: auto;
+  }
+
+  pb-photo-list {
+    flex-grow: 1;
+    width: 250px;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+
+}

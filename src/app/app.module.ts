@@ -4,17 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { CameraComponent } from './camera/camera.component';
+import {PhotoService} from "./shared/photo.service";
+import { PhotoListComponent } from './photo-list/photo-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CameraComponent,
+    PhotoListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [PhotoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
