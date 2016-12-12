@@ -49,7 +49,7 @@ export class CameraComponent implements AfterViewInit {
   counter: number = 0;
   flashState: string = 'flashOff';
 
-  constructor(private renderer: Renderer, private photoService: PhotoService, private zone: NgZone) {
+  constructor(private renderer: Renderer, private photoService: PhotoService) {
 
   }
 
