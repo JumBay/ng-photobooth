@@ -75,7 +75,10 @@ export class CameraComponent implements AfterViewInit {
 
 
     navigator.getMedia({
-      video: true,
+      video: {
+        height: {exact: 1080},
+        width: {exact: 1920}
+      },
       audio: false
     }, (stream) => {
       if (navigator.mozGetUserMedia) {
@@ -139,7 +142,7 @@ export class CameraComponent implements AfterViewInit {
 
     context.drawImage(videoEl, 0, 0, videoEl.videoWidth, videoEl.videoHeight);
 
-    let data = this.canvas.nativeElement.toDataURL('image/png');
+    let data = this.canvas.nativeElement.toDataURL('image/jpeg');
 
     imgEl.setAttribute('src', data);
     imgEl.style.display = '';
