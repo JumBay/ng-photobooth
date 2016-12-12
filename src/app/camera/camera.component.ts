@@ -73,12 +73,22 @@ export class CameraComponent implements AfterViewInit {
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia);
 
-
-    navigator.getMedia({
-      video: {
+    let videConstraints = null;
+    if (navigator.getUserMedia) {
+      videConstraints = {
         height: {exact: 1080},
         width: {exact: 1920}
-      },
+      }
+    } else if (navigator.webkitGetUserMedia) {
+      videConstraints = {
+        optional: [
+          {minWidth: 1920},]
+      };
+    }
+
+
+    navigator.getMedia({
+      video: videConstraints,
       audio: false
     }, (stream) => {
       if (navigator.mozGetUserMedia) {
