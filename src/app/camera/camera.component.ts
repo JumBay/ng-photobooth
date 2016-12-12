@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 import {PhotoService} from "../shared/photo.service";
 
+declare var navigator: any;
+
 @Component({
   selector: 'pb-camera',
   templateUrl: './camera.component.html',
@@ -47,7 +49,7 @@ export class CameraComponent implements AfterViewInit {
   counter: number = 0;
   flashState: string = 'flashOff';
 
-  constructor(private renderer: Renderer, private photoService: PhotoService) {
+  constructor(private renderer: Renderer, private photoService: PhotoService, private zone: NgZone) {
 
   }
 
@@ -66,13 +68,22 @@ export class CameraComponent implements AfterViewInit {
 
   private getMedia() {
 
-    navigator.getUserMedia({
+    navigator.getMedia = ( navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia ||
+    navigator.msGetUserMedia);
+
+
+    navigator.getMedia({
       video: true,
       audio: false
     }, (stream) => {
-      let vendorURL = window.URL;
-
-      this.video.nativeElement.setAttribute('src', vendorURL.createObjectURL(stream));
+      if (navigator.mozGetUserMedia) {
+        this.video['mozSrcObject'] = stream;
+      } else {
+        let vendorURL = window.URL || window['webkitURL'];
+        this.video.nativeElement.setAttribute('src', vendorURL.createObjectURL(stream));
+      }
 
       this.video.nativeElement.play();
 
