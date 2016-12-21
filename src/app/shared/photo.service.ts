@@ -1,10 +1,23 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class PhotoService {
-  private srcPhotos: string[] = ['http://www.rogueamoeba.com/global/images/icons/96/freebies@2x.png'];
+  private srcPhotos: string[] = [];
 
-  constructor() {
+  constructor(private http: Http) {
+  }
+
+  upload(src: string) {
+    let input = new FormData();
+
+    input.append("file", src);
+
+    this.http.post('/api/file/upload', input)
+      .subscribe(() => {
+        this.addToList(src);
+      })
+
   }
 
   addToList(src: string) {

@@ -8,7 +8,8 @@ import {
   state,
   style,
   transition,
-  animate
+  animate,
+  Input
 } from "@angular/core";
 import {PhotoService} from "../shared/photo.service";
 
@@ -52,14 +53,13 @@ export class CameraComponent implements AfterViewInit {
   @ViewChild('beep') beep: ElementRef;
   @ViewChild('flash') flash: ElementRef;
 
-  setSizeDone: boolean = false;
 
   takePicInProgress: boolean = false;
   preview: boolean = false;
   counter: number = 0;
   flashState: string = 'flashOff';
 
-  width: number = 1920;
+  @Input() width: number;
 
 
   constructor(private renderer: Renderer, private photoService: PhotoService) {
@@ -68,12 +68,11 @@ export class CameraComponent implements AfterViewInit {
 
   ngAfterViewInit() {
 
+    console.log('width', this.width);
+    this.initCamera();
+
   }
 
-  onSubmit() {
-    this.setSizeDone = true;
-    this.initCamera();
-  }
 
   private initCamera() {
 
@@ -179,7 +178,7 @@ export class CameraComponent implements AfterViewInit {
     imgEl.style.display = '';
     imgEl.style.display = 'none';
 
-    this.photoService.addToList(data);
+    this.photoService.upload(data);
 
     this.preview = true;
     this.takePicInProgress = false;

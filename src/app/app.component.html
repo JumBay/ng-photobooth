@@ -1,4 +1,17 @@
 <div class="container">
-  <pb-camera></pb-camera>
-  <pb-photo-list></pb-photo-list>
+
+  <div *ngIf="!setSizeDone" class="form">
+
+    <form (ngSubmit)="onSubmit()" #sizeForm="ngForm">
+      <label for="width">Width in px</label>
+      <input type="text" class="form-control" id="width"
+             required
+             [(ngModel)]="width" name="width" value="1920"> px
+
+      <button type="submit" [disabled]="!sizeForm.form.valid">Submit</button>
+    </form>
+  </div>
+
+  <pb-camera *ngIf="setSizeDone" [width]="width"></pb-camera>
+  <pb-photo-list *ngIf="setSizeDone"></pb-photo-list>
 </div>

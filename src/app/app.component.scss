@@ -4,6 +4,14 @@
   flex-direction: row;
   justify-content: space-between;
 
+  .form {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%;
+    text-align: center;
+  }
+
   pb-camera {
     flex-grow: 2;
     height: 100%;
