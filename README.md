@@ -1,9 +1,9 @@
-# Ng2Photobooth
+# NgPhotobooth
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
 ## Demo
-Here is the [client demo](https://jumbay.github.io/ng2-photobooth/)
+Here is the [client demo](https://jumbay.github.io/ng-photobooth/)
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

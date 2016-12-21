@@ -1,6 +1,6 @@
 import { Ng2PhotoboothPage } from './app.po';
 
-describe('ng2-photobooth App', function() {
+describe('ng-photobooth App', function() {
   let page: Ng2PhotoboothPage;
 
   beforeEach(() => {
