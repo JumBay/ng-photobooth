@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class Ng2PhotoboothPage {
+export class NgPhotoboothPage {
   navigateTo() {
     return browser.get('/');
   }

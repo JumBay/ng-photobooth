@@ -1,10 +1,10 @@
-import { Ng2PhotoboothPage } from './app.po';
+import { NgPhotoboothPage } from './app.po';
 
 describe('ng-photobooth App', function() {
-  let page: Ng2PhotoboothPage;
+  let page: NgPhotoboothPage;
 
   beforeEach(() => {
-    page = new Ng2PhotoboothPage();
+    page = new NgPhotoboothPage();
   });
 
   it('should display message saying app works', () => {
