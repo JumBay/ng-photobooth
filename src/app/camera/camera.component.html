@@ -1,13 +1,29 @@
-<div class="flash"
-     (@flashState.done)="flashStateDone($event)"
-     [@flashState]="flashState">
+<div *ngIf="!setSizeDone">
+
+  <form (ngSubmit)="onSubmit()" #sizeForm="ngForm">
+    <label for="width">Width in px</label>
+    <input type="text" class="form-control" id="width"
+           required
+           [(ngModel)]="width" name="width" value="1920">
+
+    <button type="submit" [disabled]="!sizeForm.form.valid">Submit</button>
+  </form>
+</div>
+
+
+<div *ngIf="setSizeDone">
+  <div class="flash"
+       (@flashState.done)="flashStateDone($event)"
+       [@flashState]="flashState">
+
+  </div>
+  <div class="container">
+    <video #video [ngStyle]="{display:preview ? 'none':''}" class="video"></video>
+    <img #img [ngStyle]="{display:!preview ? 'none':''}" class="photo">
+    <canvas #canvas style="display: none;"></canvas>
+    <p class="timer" #timer [ngStyle]="{display:counter === 0 ? 'none':''}">{{counter}}</p>
+  </div>
+  <audio #beep class="beep" src="assets/sounds/countdown.wav"></audio>
+  <audio #flash class="flash" src="assets/sounds/flash.wav"></audio>
 
 </div>
-<div class="container">
-  <video #video [ngStyle]="{display:preview ? 'none':''}" class="video"></video>
-  <img #img [ngStyle]="{display:!preview ? 'none':''}" class="photo">
-  <canvas #canvas style="display: none;"></canvas>
-  <p class="timer" #timer [ngStyle]="{display:counter === 0 ? 'none':''}">{{counter}}</p>
-</div>
-<audio #beep class="beep" src="assets/sounds/countdown.wav"></audio>
-<audio #flash class="flash" src="assets/sounds/flash.wav"></audio>

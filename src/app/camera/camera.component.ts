@@ -1,7 +1,15 @@
 import {
-  Component, ViewChild, ElementRef, AfterViewInit, Renderer, trigger, state, style,
-  transition, animate
-} from '@angular/core';
+  Component,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  Renderer,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from "@angular/core";
 import {PhotoService} from "../shared/photo.service";
 
 declare var navigator: any;
@@ -44,23 +52,37 @@ export class CameraComponent implements AfterViewInit {
   @ViewChild('beep') beep: ElementRef;
   @ViewChild('flash') flash: ElementRef;
 
+  setSizeDone: boolean = false;
+
   takePicInProgress: boolean = false;
   preview: boolean = false;
   counter: number = 0;
   flashState: string = 'flashOff';
+
+  width: number = 1920;
+
 
   constructor(private renderer: Renderer, private photoService: PhotoService) {
 
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
+
+  }
+
+  onSubmit() {
+    this.setSizeDone = true;
+    this.initCamera();
+  }
+
+  private initCamera() {
 
     this.getMedia();
 
     this.renderer.listenGlobal('body', 'click', () => {
       this.takePictureAfterCountdown();
     });
+
     this.renderer.listenGlobal('body', 'keypress', () => {
       this.takePictureAfterCountdown();
     });
@@ -73,22 +95,21 @@ export class CameraComponent implements AfterViewInit {
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia);
 
-    let videConstraints = null;
+    let videoConstraints = null;
     if (navigator.getUserMedia) {
-      videConstraints = {
-        height: {exact: 1080},
-        width: {exact: 1920}
+      videoConstraints = {
+        width: {exact: this.width}
       }
     } else if (navigator.webkitGetUserMedia) {
-      videConstraints = {
+      videoConstraints = {
         optional: [
-          {minWidth: 1920},]
+          {minWidth: this.width},]
       };
     }
 
 
     navigator.getMedia({
-      video: videConstraints,
+      video: videoConstraints,
       audio: false
     }, (stream) => {
       if (navigator.mozGetUserMedia) {
@@ -102,7 +123,7 @@ export class CameraComponent implements AfterViewInit {
 
 
     }, (err) => {
-      console.log("An error occured! " + err);
+      console.log("An error occured! ", err);
     });
   }
 
