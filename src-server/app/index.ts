@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 
-
 Camembert.configure(environment, (app: express.Application, routes: CamembertRouting[]) => {
 
   // Parsers for POST data
@@ -16,10 +15,13 @@ Camembert.configure(environment, (app: express.Application, routes: CamembertRou
   app.use(express.static(path.join(__dirname, '../dist')));
 
 
-
   // Catch all other routes and return the index file
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  app.get('*', (req, res, next) => {
+    if (req.url.match('/api/')) {
+      next();
+    } else {
+      res.sendFile(path.join(__dirname, '../dist/index.html'));
+    }
   });
 
 
