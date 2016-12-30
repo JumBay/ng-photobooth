@@ -1,6 +1,6 @@
 {
   "name": "ng-photobooth",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Jean-Baptiste Malatrasi",
   "license": "MIT",
   "angular-cli": {},
@@ -15,7 +15,7 @@
     "concurrently": "concurrently",
     "server:build": "rm -rf dist-server && npm run server:tsc",
     "nodemon:debug": "NODE_ENV=dev nodemon --debug=5858",
-    "start:server": "node  dist-server/index.js",
+    "server:start": "node  dist-server/index.js",
     "server:tsc": "tsc -p ./src-server",
     "server:tsc:w": "tsc -p ./src-server -w",
     "server:watch": "npm run concurrently \"npm run server:tsc:w\" \"npm run nodemon:debug dist-server/index.js\""
